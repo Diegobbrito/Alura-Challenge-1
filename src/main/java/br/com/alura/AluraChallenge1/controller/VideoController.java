@@ -2,12 +2,11 @@ package br.com.alura.AluraChallenge1.controller;
 
 import br.com.alura.AluraChallenge1.domain.Video;
 import br.com.alura.AluraChallenge1.dto.VideoRequest;
+import br.com.alura.AluraChallenge1.dto.VideoResponse;
 import br.com.alura.AluraChallenge1.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class VideoController {
@@ -16,16 +15,16 @@ public class VideoController {
     private VideoService service;
 
     @GetMapping("videos")
-    public ResponseEntity<List<Video>> getVideos(){
+    public ResponseEntity<VideoResponse> videos(){
         return ResponseEntity.ok(service.getVideos());
     }
 
     @GetMapping("videos/{id}")
-    public ResponseEntity<Video> getVideo(@PathVariable int id){
+    public ResponseEntity<Video> video(@PathVariable int id){
         return ResponseEntity.ok(service.getVideo(id));
     }
 
-    @PostMapping
+    @PostMapping("videos")
     public ResponseEntity<Video> create(@RequestBody VideoRequest request){
         final var response = service.create(request);
         return ResponseEntity.ok(response);
