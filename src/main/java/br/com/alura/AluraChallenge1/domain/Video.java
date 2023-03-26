@@ -19,6 +19,6 @@ public class Video {
     private String descricao;
     private String url;
 
-//    @ManyToOne(targetEntity = Categoria.class)
-//    private Long idCategoria;
+    @ManyToOne
+    private Categoria categoria;
 }
