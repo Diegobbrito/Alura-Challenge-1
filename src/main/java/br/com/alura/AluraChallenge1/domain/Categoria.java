@@ -1,12 +1,11 @@
 package br.com.alura.AluraChallenge1.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Table;
+
+import java.util.List;
 
 @Entity
 @Table(appliesTo = "categoria")
@@ -19,4 +18,7 @@ public class Categoria {
     private Long id;
     private String titulo;
     private String cor;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Video> videos;
 }
