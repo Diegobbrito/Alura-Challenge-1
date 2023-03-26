@@ -8,4 +8,5 @@ public class VideoRequest {
     private String titulo;
     private String descricao;
     private String url;
+    private Long idCategoria;
 }
