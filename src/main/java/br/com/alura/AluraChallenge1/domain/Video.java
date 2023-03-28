@@ -1,5 +1,6 @@
 package br.com.alura.AluraChallenge1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Video {
     private String descricao;
     private String url;
 
+    @JsonIgnore
     @ManyToOne
     private Categoria categoria;
 }
