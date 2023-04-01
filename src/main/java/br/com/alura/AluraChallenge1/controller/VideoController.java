@@ -5,8 +5,11 @@ import br.com.alura.AluraChallenge1.dto.VideoRequest;
 import br.com.alura.AluraChallenge1.dto.VideoResponse;
 import br.com.alura.AluraChallenge1.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class VideoController {
@@ -14,9 +17,15 @@ public class VideoController {
     @Autowired
     private VideoService service;
 
+    @GetMapping("videos/free")
+    public ResponseEntity<VideoResponse> free(){
+        return ResponseEntity.ok(service.getFreeVideos());
+    }
+
+
     @GetMapping("videos")
-    public ResponseEntity<VideoResponse> videos(){
-        return ResponseEntity.ok(service.getVideos());
+    public ResponseEntity<Page<Video>> videos(Pageable pageable){
+        return ResponseEntity.ok(service.getVideos(pageable));
     }
 
     @GetMapping("videos/{id}")
