@@ -7,6 +7,8 @@ import br.com.alura.AluraChallenge1.dto.VideoResponse;
 import br.com.alura.AluraChallenge1.repository.CategoriaRepository;
 import br.com.alura.AluraChallenge1.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,11 +17,8 @@ public class VideoService {
     private VideoRepository repository;
     @Autowired
     private CategoriaRepository categoriaRepository;
-    public VideoResponse getVideos() {
-        final var data = repository.findAll();
-        final var response = new VideoResponse();
-        response.setVideos(data);
-        return response;
+    public Page<Video> getVideos(Pageable pageable) {
+       return  repository.findAll(pageable);
     }
 
     public Video getVideo(int id) {
@@ -52,4 +51,10 @@ public class VideoService {
     }
 
 
+    public VideoResponse getFreeVideos() {
+        final var data = repository.findLimitedTo();
+        final var response = new VideoResponse();
+        response.setVideos(data);
+        return response;
+    }
 }
