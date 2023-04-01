@@ -4,9 +4,10 @@ import br.com.alura.AluraChallenge1.domain.Categoria;
 import br.com.alura.AluraChallenge1.dto.CategoriaRequest;
 import br.com.alura.AluraChallenge1.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +16,8 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository repository;
 
-    public List<Categoria> list() {
-        return repository.findAll();
+    public Page<Categoria> list(final Pageable pageable) {
+        return repository.findAll(pageable);
     }
     public Categoria get(Long id) {
         Optional<Categoria> optionalCategoria = repository.findById(id);

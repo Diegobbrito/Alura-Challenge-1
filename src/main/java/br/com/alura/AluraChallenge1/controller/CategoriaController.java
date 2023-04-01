@@ -4,10 +4,10 @@ import br.com.alura.AluraChallenge1.domain.Categoria;
 import br.com.alura.AluraChallenge1.dto.CategoriaRequest;
 import br.com.alura.AluraChallenge1.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class CategoriaController {
@@ -16,8 +16,8 @@ public class CategoriaController {
     private CategoriaService service;
 
     @GetMapping("/categorias")
-    public ResponseEntity<List<Categoria>> categoria(){
-       return ResponseEntity.ok( service.list());
+    public ResponseEntity<Page<Categoria>> categoria(Pageable pageable){
+       return ResponseEntity.ok( service.list(pageable));
     }
 
     @GetMapping("categorias/{id}")
